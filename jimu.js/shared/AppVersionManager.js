@@ -1,13 +1,413 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["./BaseVersionManager","./utils"],function(g,h){function f(){this.versions=[{version:"1.0",description:"The version embedded in portal 10.3 final.",upgrader:function(a){return a},compatible:!0},{version:"1.1",description:"The version embedded in online3.6, and used in developer edition 1.0.",upgrader:function(a){if(a.widgetOnScreen&&a.widgetOnScreen.panel&&("themes/FoldableTheme/panels/TitlePanel/Panel"===a.widgetOnScreen.panel.uri||"jimu/BaseWidgetPanel"===a.widgetOnScreen.panel.uri))a.widgetOnScreen.panel.uri=
-"jimu/PreloadWidgetIconPanel";return a},compatible:!0},{version:"1.2",description:"The version embedded in online3.7.",upgrader:function(a){var c=0;if(a.widgetOnScreen&&a.widgetOnScreen.widgets){for(var b=!1,c=0;c<a.widgetOnScreen.widgets.length;c++)"widgets/Splash/Widget"===a.widgetOnScreen.widgets[c].uri&&(b=!0);b||a.widgetOnScreen.widgets.push({uri:"widgets/Splash/Widget",visible:!1,positionRelativeTo:"browser",version:"1.2"});b=!1;for(c=0;c<a.widgetOnScreen.widgets.length;c++)"widgets/TimeSlider/Widget"===
-a.widgetOnScreen.widgets[c].uri&&(b=!0);b||a.widgetOnScreen.widgets.push({uri:"widgets/TimeSlider/Widget",visible:!1,position:{bottom:55,left:7},version:"1.2"});b=!1;for(c=0;c<a.widgetOnScreen.widgets.length;c++)"widgets/Swipe/Widget"===a.widgetOnScreen.widgets[c].uri&&(b=!0);b||a.widgetOnScreen.widgets.push({uri:"widgets/Swipe/Widget",visible:!1,position:{top:145,left:7},version:"1.2"})}return a},compatible:!0},{version:"1.3",description:"The version embedded in online3.8 \x26 online3.9.",upgrader:function(a){(function(a){h.visitElement(a,
-function(a){a.positionRelativeTo&&(a.position?a.position.relativeTo=a.positionRelativeTo:a.position={relativeTo:a.positionRelativeTo},a.panel&&(a.panel.position?a.panel.position.relativeTo=a.panel.positionRelativeTo:a.panel.position={relativeTo:a.panel.positionRelativeTo}))});var b=a.widgetOnScreen;b&&(b.panel&&b.panel.positionRelativeTo)&&(b.panel.position?b.panel.position.relativeTo=b.panel.positionRelativeTo:b.panel.position={relativeTo:b.panel.positionRelativeTo});if((b=a.widgetPool)&&b.panel&&
-b.panel.positionRelativeTo)b.panel.position?b.panel.position.relativeTo=b.panel.positionRelativeTo:b.panel.position={relativeTo:b.panel.positionRelativeTo}})(a);a.widgetOnScreen&&(a.widgetOnScreen.panel&&"jimu/PreloadWidgetIconPanel"===a.widgetOnScreen.panel.uri)&&(a.widgetOnScreen.panel.uri="jimu/OnScreenWidgetPanel");(function(a){if(a.widgetOnScreen&&a.widgetOnScreen.widgets&&a.theme&&"FoldableTheme"===a.theme.name){var b=null,d=null;if(b=a.widgetOnScreen.widgets[4])void 0!==b.position.top?(b={position:{left:205,
-top:45}},d={position:{left:255,top:45}}):(b={position:{left:205,bottom:55}},d={position:{left:255,bottom:55}}),a.widgetOnScreen.widgets.splice(7,0,b,d)}})(a);(function(){for(var c=0,b=0,d=!1,c=0;c<a.widgetOnScreen.widgets.length;c++)if("widgets/Geocoder/Widget"===a.widgetOnScreen.widgets[c].uri){d=!0;break}for(var e=!1,b=0;b<a.widgetOnScreen.widgets.length;b++)if("widgets/Search/Widget"===a.widgetOnScreen.widgets[b].uri){e=!0;break}!e&&d&&(c=a.widgetOnScreen.widgets[c],c.uri="widgets/Search/Widget",
-c.name="Search")})(a);(function(a){for(var b=0,b=a.widgetOnScreen.widgets.length-1;0<=b;b--){var d=a.widgetOnScreen.widgets[b];if("widgets/Swipe/Widget"===d.uri&&!d.closeable&&(a.widgetOnScreen.widgets.splice(b,1),!1!==d.visible)){d.closeable=!0;var e;a:{for(e=e=0;e<a.widgetOnScreen.widgets.length;e++)if(!a.widgetOnScreen.widgets[e].uri)break a;e=-1}0<=e&&(d.position=a.widgetOnScreen.widgets[e].position,a.widgetOnScreen.widgets[e]=d)}"widgets/TimeSlider/Widget"===d.uri&&(!1===d.visible?a.widgetOnScreen.widgets.splice(b,
-1):d.closeable=!0)}})(a);a.widgetOnScreen.widgets.push({uri:"widgets/ZoomSlider/Widget",position:{top:5,left:7},version:"1.3"});a.loadingPage||(a.loadingPage={backgroundColor:"#508dca",backgroundImage:{visible:!1},loadingGif:{visible:!0,uri:"configs/loading/images/predefined_loading_1.gif",width:58,height:58}});return a},compatible:!0},{version:"1.4",description:"The version embedded in online3.10.",upgrader:function(a){if(a.theme){var c=a.theme.name;if(("FoldableTheme"===c||"JewelryBoxTheme"===c)&&
-a.widgetOnScreen){var b=a.widgetOnScreen.widgets;if(b&&0<b.length)for(var c="themes/"+c+"/widgets/HeaderController/Widget",d=null,e=0;e<b.length;e++)if((d=b[e])&&d.uri===c&&d.position&&310===d.position.paddingRight)d.position.paddingRight=275}}return a},compatible:!0},{version:"2.0beta",description:"The version for Developer Edition beta 2.0.",upgrader:function(a){a.keepAppState=!0;return a},compatible:!0},{version:"2.0",description:"The version for Online 4.1.",upgrader:function(a){return a},compatible:!0},
-{version:"2.0.1",description:"The version for Developer Edition 2.0.",upgrader:function(a){return a},compatible:!0},{version:"2.1",description:"The version for Online 4.2.",upgrader:function(a){return a},compatible:!0}];this.isCompatible=function(a,c){for(var b=this.getVersionIndex(a),d=this.getVersionIndex(c),b=b+1;b<=d;b++)if(!1===this.versions[b].compatible)return!1;return!0}}f.prototype=new g;return f.prototype.constructor=f});
+define(['./BaseVersionManager', './utils'],
+function(BaseVersionManager, utils) {
+
+  //app version manager manage config and framework version
+  function AppWidgetManager(){
+    this.versions = [{
+      version: '1.0',
+
+      description: 'The version embedded in portal 10.3 final.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+      //if true, means widgets that depend on the last version can run in this version.
+      //if not set, means true.
+      compatible: true
+    }, {
+      version: '1.1',
+
+      description: 'The version embedded in online3.6, and used in developer edition 1.0.',
+
+      upgrader: function(oldConfig){
+        if(oldConfig.widgetOnScreen && oldConfig.widgetOnScreen.panel &&
+          (oldConfig.widgetOnScreen.panel.uri === 'themes/FoldableTheme/panels/TitlePanel/Panel' ||
+          oldConfig.widgetOnScreen.panel.uri === 'jimu/BaseWidgetPanel')){//In 1.0, tab theme use 'jimu/BaseWidgetPanel'
+          oldConfig.widgetOnScreen.panel.uri = 'jimu/PreloadWidgetIconPanel';
+        }
+
+        return oldConfig;
+      },
+      compatible: true
+    }, {
+      version: '1.2',
+
+      description: 'The version embedded in online3.7.',
+
+      upgrader: function(oldConfig){
+        var i = 0;
+        if(oldConfig.widgetOnScreen && oldConfig.widgetOnScreen.widgets){
+          //add splash widget
+          var findSplashWidget = false;
+          for(i = 0; i < oldConfig.widgetOnScreen.widgets.length; i++){
+            if(oldConfig.widgetOnScreen.widgets[i].uri === 'widgets/Splash/Widget'){
+              findSplashWidget = true;
+            }
+          }
+
+          if(!findSplashWidget){
+            oldConfig.widgetOnScreen.widgets.push({
+              "uri": "widgets/Splash/Widget",
+              "visible": false,
+              "positionRelativeTo": "browser",
+              "version": "1.2"
+            });
+          }
+
+          var findTimesliderWidget = false;
+          for(i = 0; i < oldConfig.widgetOnScreen.widgets.length; i++){
+            if(oldConfig.widgetOnScreen.widgets[i].uri === 'widgets/TimeSlider/Widget'){
+              findTimesliderWidget = true;
+            }
+          }
+
+          if(!findTimesliderWidget){
+            oldConfig.widgetOnScreen.widgets.push({
+              "uri": "widgets/TimeSlider/Widget",
+              "visible": false,
+              "position": {
+                "bottom": 55,
+                "left": 7
+              },
+              "version": "1.2"
+            });
+          }
+
+          var findSwipeWidget = false;
+          for(i = 0; i < oldConfig.widgetOnScreen.widgets.length; i++){
+            if(oldConfig.widgetOnScreen.widgets[i].uri === 'widgets/Swipe/Widget'){
+              findSwipeWidget = true;
+            }
+          }
+
+          if (!findSwipeWidget){
+            oldConfig.widgetOnScreen.widgets.push({
+              "uri": "widgets/Swipe/Widget",
+              "visible": false,
+              "position": {
+                "top": 145,
+                "left": 7
+              },
+              "version": "1.2"
+            });
+          }
+        }
+
+        return oldConfig;
+      },
+      compatible: true
+    }, {
+      version: '1.3',
+
+      description: 'The version embedded in online3.8 & online3.9.',
+
+      upgrader: function(oldConfig){
+        upgradePositionRelativeTo(oldConfig);
+        renamePreloadWidgetIconPanelToOnScreenWidgetPanel(oldConfig);
+        add2PlaceholdersForFoldableTheme(oldConfig);
+        renameGeocoderToSearch(oldConfig);
+        addCloeableForSwipeAndTimeslider(oldConfig);
+        addZoomSliderWidget(oldConfig);
+        addLoadingPage(oldConfig);
+
+        /*******************functions********************/
+
+        function addCloeableForSwipeAndTimeslider(oldConfig){
+          var i = 0;
+          for(i = oldConfig.widgetOnScreen.widgets.length - 1; i >= 0; i--){
+            var widget = oldConfig.widgetOnScreen.widgets[i];
+            if(widget.uri === 'widgets/Swipe/Widget' && !widget.closeable){
+              //add closeable check to avoid multiple enter in loop
+              oldConfig.widgetOnScreen.widgets.splice(i, 1);
+              if(widget.visible !== false){
+                widget.closeable = true;
+                //put swipe in the first avialable placeholder
+                var placeIndex = getFirstPlaceholder(oldConfig);
+                if(placeIndex >= 0){
+                  widget.position = oldConfig.widgetOnScreen.widgets[placeIndex].position;
+                  oldConfig.widgetOnScreen.widgets[placeIndex] = widget;
+                }
+              }
+            }
+
+            if(widget.uri === 'widgets/TimeSlider/Widget'){
+              if(widget.visible === false){
+                oldConfig.widgetOnScreen.widgets.splice(i, 1);
+              }else{
+                widget.closeable = true;
+              }
+            }
+          }
+        }
+
+        function getFirstPlaceholder(oldConfig){
+          var i = 0;
+          for(i = 0; i < oldConfig.widgetOnScreen.widgets.length; i++){
+            if(!oldConfig.widgetOnScreen.widgets[i].uri){
+              return i;
+            }
+          }
+          return -1;
+        }
+
+        function addZoomSliderWidget(oldConfig){
+          oldConfig.widgetOnScreen.widgets.push({
+            "uri": "widgets/ZoomSlider/Widget",
+            "position": {
+              "top": 5,
+              "left": 7
+            },
+            "version": "1.3"
+          });
+        }
+
+        function renameGeocoderToSearch(){
+          var i = 0, j = 0;
+          var findGeocoderWidget = false;
+          for(i = 0; i < oldConfig.widgetOnScreen.widgets.length; i++){
+            if(oldConfig.widgetOnScreen.widgets[i].uri === 'widgets/Geocoder/Widget'){
+              findGeocoderWidget = true;
+              break;
+            }
+          }
+
+          var findSearchWidget = false;
+          for(j = 0; j < oldConfig.widgetOnScreen.widgets.length; j++){
+            if(oldConfig.widgetOnScreen.widgets[j].uri === 'widgets/Search/Widget'){
+              findSearchWidget = true;
+              break;
+            }
+          }
+
+          if (!findSearchWidget) {
+            if (findGeocoderWidget) {
+              var geocoder = oldConfig.widgetOnScreen.widgets[i];
+              geocoder.uri = "widgets/Search/Widget";
+              geocoder.name = "Search";
+            }
+          }
+        }
+
+        function add2PlaceholdersForFoldableTheme(oldConfig){
+          if(oldConfig.widgetOnScreen && oldConfig.widgetOnScreen.widgets) {
+            //add two new placeholders for FoldableTheme
+            if(oldConfig.theme && oldConfig.theme.name === 'FoldableTheme'){
+              var ph_7 = null;
+              var ph_8 = null;
+
+              var placeholder = oldConfig.widgetOnScreen.widgets[4];
+
+              if(placeholder){
+                if(placeholder.position.top !== undefined){
+                  //default layout of FoldableTheme
+                  ph_7 = {
+                    "position": {
+                      "left": 205,
+                      "top": 45
+                    }
+                  };
+                  ph_8 = {
+                    "position": {
+                      "left": 255,
+                      "top": 45
+                    }
+                  };
+                }else{
+                  //layout1 of FoldableTheme
+                  ph_7 = {
+                    "position": {
+                      "left": 205,
+                      "bottom": 55
+                    }
+                  };
+                  ph_8 = {
+                    "position": {
+                      "left": 255,
+                      "bottom": 55
+                    }
+                  };
+                }
+
+                oldConfig.widgetOnScreen.widgets.splice(7, 0, ph_7, ph_8);
+              }
+            }
+          }
+        }
+
+        function upgradePositionRelativeTo(oldConfig){
+          utils.visitElement(oldConfig, function(element){
+            if(element.positionRelativeTo){
+              if(element.position){
+                element.position.relativeTo = element.positionRelativeTo;
+              }else{
+                element.position = {
+                  relativeTo: element.positionRelativeTo
+                };
+              }
+
+              if(element.panel){
+                if(element.panel.position){
+                  element.panel.position.relativeTo = element.panel.positionRelativeTo;
+                }else{
+                  element.panel.position = {
+                    relativeTo: element.panel.positionRelativeTo
+                  };
+                }
+              }
+            }
+          });
+
+          var section = oldConfig.widgetOnScreen;
+          if(section && section.panel &&
+            section.panel.positionRelativeTo){
+
+            if(section.panel.position){
+              section.panel.position.relativeTo =
+                section.panel.positionRelativeTo;
+            }else{
+              section.panel.position = {
+                relativeTo: section.panel.positionRelativeTo
+              };
+            }
+          }
+
+          section = oldConfig.widgetPool;
+          if(section && section.panel &&
+            section.panel.positionRelativeTo){
+
+            if(section.panel.position){
+              section.panel.position.relativeTo =
+                section.panel.positionRelativeTo;
+            }else{
+              section.panel.position = {
+                relativeTo: section.panel.positionRelativeTo
+              };
+            }
+          }
+        }
+
+        function renamePreloadWidgetIconPanelToOnScreenWidgetPanel(oldConfig){
+          if(oldConfig.widgetOnScreen && oldConfig.widgetOnScreen.panel &&
+            oldConfig.widgetOnScreen.panel.uri === 'jimu/PreloadWidgetIconPanel'){
+            oldConfig.widgetOnScreen.panel.uri = 'jimu/OnScreenWidgetPanel';
+          }
+        }
+
+        function addLoadingPage(oldConfig){
+          //for XT1.2
+          if(!oldConfig.loadingPage){
+            oldConfig.loadingPage = {
+              "backgroundColor": "#508dca",
+              "backgroundImage":{
+                "visible":false
+              },
+              "loadingGif":{
+                "visible": true,
+                "uri": "configs/loading/images/predefined_loading_1.gif",
+                "width": 58,
+                "height": 58
+              }
+            };
+          }
+        }
+
+        return oldConfig;
+      },
+      compatible: true
+    }, {
+      version: '1.4',
+
+      description: 'The version embedded in online3.10.',
+
+      upgrader: function(oldConfig){
+        updatePaddingRightOfHeaderController(oldConfig);
+
+        /*******************functions********************/
+        function updatePaddingRightOfHeaderController(oldConfig){
+          if(oldConfig.theme){
+            var themeName = oldConfig.theme.name;
+            if(themeName === 'FoldableTheme' || themeName === 'JewelryBoxTheme'){
+              if(oldConfig.widgetOnScreen){
+                var widgets = oldConfig.widgetOnScreen.widgets;
+                if(widgets && widgets.length > 0){
+                  var uri = "themes/" + themeName + "/widgets/HeaderController/Widget";
+                  var widget = null;
+                  for(var i = 0; i < widgets.length; i++){
+                    widget = widgets[i];
+                    if(widget && widget.uri === uri){
+                      if(widget.position){
+                        if(widget.position.paddingRight === 310){
+                          widget.position.paddingRight = 275;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        return oldConfig;
+      },
+      compatible: true
+    }, {
+      version: '2.0beta',
+
+      description: 'The version for Developer Edition beta 2.0.',
+
+      upgrader: function(oldConfig){
+        oldConfig.keepAppState = true;
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.0',
+
+      description: 'The version for Online 4.1.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.0.1',
+
+      description: 'The version for Developer Edition 2.0.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
+      compatible: true
+    }, {
+      version: '2.1',
+
+      description: 'The version for Online 4.2.',
+
+      upgrader: function(oldConfig){
+        return oldConfig;
+      },
+
+      compatible: true
+    }];
+
+    this.isCompatible = function(_oldVersion, _newVersion){
+      var oldVersionIndex = this.getVersionIndex(_oldVersion);
+      var newVersionIndex = this.getVersionIndex(_newVersion);
+      var i;
+      for(i = oldVersionIndex + 1; i <= newVersionIndex; i++){
+        if(this.versions[i].compatible === false){
+          return false;
+        }
+      }
+      return true;
+    };
+  }
+
+  AppWidgetManager.prototype = new BaseVersionManager();
+  AppWidgetManager.prototype.constructor = AppWidgetManager;
+  return AppWidgetManager;
+});

@@ -1,7 +1,102 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-define(["jimu/shared/BaseVersionManager"],function(h){function e(){this.versions=[{version:"1.0",upgrader:function(b){return b}},{version:"1.1",upgrader:function(b){return b}},{version:"1.2",upgrader:function(b){return b}},{version:"1.3",upgrader:function(b){var f={sources:[]};if(!b.geocoder)return f;b=b.geocoder;var a=null;if(b.arcgisGeocoder){a={};if("[object Object]"===Object.prototype.toString.call(b.arcgisGeocoder)){for(var c in b.arcgisGeocoder)a[c]=b.arcgisGeocoder[c];a.url=a.url||"https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
-a.singleLineFieldName=a.singleLineFieldName||"SingleLine";a.name=a.name||"Esri World Geocoder"}else"boolean"===typeof b.arcgisGeocoder&&(a.url="https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",a.name="Esri World Geocoder",a.singleLineFieldName="SingleLine",a.placeholder="Esri World Geocoder");a.countryCode=a.sourceCountry||a.countryCode||"";a.maxResults=b.maxLocations||6;f.sources.push(a)}c=0;for(var d=b.geocoders.length;c<d;c++){var a={},e=b.geocoders[c],g;for(g in e)a[g]=e[g];
-a.countryCode=a.sourceCountry||a.countryCode||"";a.maxResults=b.maxLocations||6;a.type=a.type||"locator";f.sources.push(a)}f.upgradeFromGeocoder=!0;return f}},{version:"1.4",upgrader:function(b){b.allPlaceholder="";b.showInfoWindowOnSelect=!0;return b}},{version:"2.0beta",upgrader:function(b){(function(b){for(var a=0,c=b.length;a<c;a++){var d=b[a];d.maxSuggestions=d.maxSuggestions||6}})(b.sources);(function(b){for(var a=0,c=b.length;a<c;a++){var d=b[a];d.zoomScale=d.zoomScale||5E4}})(b.sources);return b}}]}
-e.prototype=new h;return e.prototype.constructor=e});
+define(['jimu/shared/BaseVersionManager'],
+  function(BaseVersionManager) {
+
+    function VersionManager() {
+      this.versions = [{
+        version: '1.0',
+        upgrader: function(oldConfig) {
+          return oldConfig;
+        }
+      }, {
+        version: '1.1',
+        upgrader: function(oldConfig) {
+          return oldConfig;
+        }
+      }, {
+        version: '1.2',
+        upgrader: function(oldConfig) {
+          return oldConfig;
+        }
+      }, {
+        version: '1.3',
+        upgrader: function(oldConfig) {
+          var newConfig = {};
+          newConfig.sources = [];
+          if (!oldConfig.geocoder) {
+            return newConfig;
+          }
+          var oldGeocoder = oldConfig.geocoder;
+          var source = null;
+          var defaultMaxResults = 6;
+          if (oldGeocoder.arcgisGeocoder) {
+            source = {};
+            if (Object.prototype.toString.call(oldGeocoder.arcgisGeocoder) === "[object Object]") {
+              for (var p in oldGeocoder.arcgisGeocoder) {
+                source[p] = oldGeocoder.arcgisGeocoder[p];
+              }
+              source.url = source.url ||
+                "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+              source.singleLineFieldName = source.singleLineFieldName || "SingleLine";
+              source.name = source.name || "Esri World Geocoder";
+            } else if (typeof oldGeocoder.arcgisGeocoder === "boolean") {
+              source.url = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer";
+              source.name = "Esri World Geocoder";
+              source.singleLineFieldName = "SingleLine";
+              source.placeholder = "Esri World Geocoder";
+            }
+            source.countryCode = source.sourceCountry || source.countryCode || "";
+            source.maxResults = oldGeocoder.maxLocations || defaultMaxResults;
+            newConfig.sources.push(source);
+          }
+
+          for (var i = 0, len = oldGeocoder.geocoders.length; i < len; i++) {
+            source = {};
+            var geocoder = oldGeocoder.geocoders[i];
+            for (var p2 in geocoder) {
+              source[p2] = geocoder[p2];
+            }
+            source.countryCode = source.sourceCountry || source.countryCode || "";
+            source.maxResults = oldGeocoder.maxLocations || defaultMaxResults;
+            source.type = source.type || "locator";
+            newConfig.sources.push(source);
+          }
+
+          newConfig.upgradeFromGeocoder = true;
+          return newConfig;
+        }
+      }, {
+        version: "1.4",
+        upgrader: function(oldConfig) {
+          oldConfig.allPlaceholder = "";
+          oldConfig.showInfoWindowOnSelect = true;
+
+          return oldConfig;
+        }
+      }, {
+        version: "2.0beta",
+        upgrader: function(oldConfig) {
+          function addMaxSuggestions(sources) {
+            for (var i = 0, len = sources.length; i < len; i++) {
+              var s = sources[i];
+              s.maxSuggestions = s.maxSuggestions || 6;
+            }
+          }
+          function addZoomScale(sources) {
+            for (var i = 0, len = sources.length; i < len; i++) {
+              var s = sources[i];
+              s.zoomScale = s.zoomScale || 50000;
+            }
+          }
+
+          addMaxSuggestions(oldConfig.sources);
+          addZoomScale(oldConfig.sources);
+
+          return oldConfig;
+        }
+      }];
+    }
+
+    VersionManager.prototype = new BaseVersionManager();
+    VersionManager.prototype.constructor = VersionManager;
+    return VersionManager;
+  });

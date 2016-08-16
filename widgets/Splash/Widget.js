@@ -1,16 +1,282 @@
-// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
-// See http://js.arcgis.com/3.15/esri/copyright.txt and http://www.arcgis.com/apps/webappbuilder/copyright.txt for details.
-//>>built
-require({cache:{"widgets/Splash/_build-generate_module":function(){define(["dojo/text!./Widget.html","dojo/text!./css/style.css","dojo/i18n!./nls/strings"],function(){})},"url:widgets/Splash/Widget.html":'\x3cdiv\x3e\r\n  \x3cdiv class\x3d"overlay" data-dojo-attach-point\x3d"overlayNode"\x3e\x3c/div\x3e\r\n  \x3cdiv class\x3d"envelope" data-dojo-attach-point\x3d"envelopeNode"\x3e\r\n    \x3cdiv class\x3d"splash-container" data-dojo-attach-point\x3d"splashContainerNode"\x3e\r\n      \x3cdiv class\x3d"custom-content" data-dojo-attach-point\x3d"customContentNode"\x3e\x3c/div\x3e\r\n      \x3cdiv class\x3d"footer" data-dojo-attach-point\x3d"footerNode"\x3e\r\n        \x3cdiv data-dojo-attach-point\x3d"confirmCheck"\x3e\x3c/div\x3e\r\n        \x3cdiv class\x3d"jimu-btn jimu-float-trailing" data-dojo-attach-point\x3d"okNode" data-dojo-attach-event\x3d"onclick:onOkClick"\x3e${nls.ok}\x3c/div\x3e\r\n      \x3c/div\x3e\r\n    \x3c/div\x3e\r\n  \x3c/div\x3e\r\n\x3c/div\x3e',
-"url:widgets/Splash/css/style.css":".jimu-widget-splash{position: absolute !important; top: 0 !important; bottom: 0 !important; left: 0 !important; right: 0 !important; margin: auto !important; z-index: 110;}.jimu-widget-splash .overlay{top: 0; left: 0; width: 100%; height: 100%; position: absolute; background-color:rgba(0,0,0,0.3);}.jimu-widget-splash-desktop .splash-container .jimu-checkbox,.jimu-widget-splash-mobile .splash-container .jimu-checkbox{font-size: 14px; color: #fff; overflow: auto; max-height: 50px; min-height: 25px; margin-bottom: 10px; display: block;}.jimu-widget-splash-desktop .splash-container .jimu-checkbox .label,.jimu-widget-splash-mobile .splash-container .jimu-checkbox .label{white-space: normal; text-indent: 5px; margin-left: 5px; color: #fff; float: none !important; display: inline;}.jimu-rtl .jimu-widget-splash-desktop .splash-container .jimu-checkbox .label,.jimu-rtl .jimu-widget-splash-mobile .splash-container .jimu-checkbox .label{margin-left: auto; margin-right: 5px;}.jimu-widget-splash-desktop .envelope,.jimu-widget-splash-mobile .envelope{position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto; -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none;}.jimu-widget-splash-desktop .splash-container .jimu-btn,.jimu-widget-splash-mobile .splash-container .jimu-btn{height: 33px; padding: 0; width: 60px; line-height: 33px;}.jimu-rtl .jimu-widget-splash-desktop .splash-container .jimu-btn,.jimu-rtl .jimu-widget-splash-mobile .splash-container .jimu-btn{left: 0; right: auto;}.jimu-widget-splash-desktop .splash-container .enable-btn,.jimu-widget-splash-mobile .splash-container .enable-btn{background-color: #518dca;}.jimu-widget-splash-desktop .splash-container .disable-btn,.jimu-widget-splash-mobile .splash-container .disable-btn{background-color: #a0acbf;}.jimu-widget-splash-desktop .splash-container .jimu-checkbox .checkbox,.jimu-widget-splash-mobile .splash-container .jimu-checkbox .checkbox{background-color: #fff;}.jimu-widget-splash-desktop .envelope{max-height: 500px; max-width: 640px;}.jimu-widget-splash-desktop .splash-container{position: absolute; display: inline-block; background-color: #485566; box-shadow: 0 0 4px rgba(160, 160, 160, 0.4);}.jimu-widget-splash-desktop .custom-content{width: 560px; margin: 20px 40px; overflow: auto; color: #fff; max-height: 388px;}.jimu-widget-splash-desktop .splash-container .footer{max-height: 100px; margin: 0 40px 10px 40px; position: relative; overflow: hidden;}.jimu-widget-splash-mobile .envelope{background-color: #485566; box-shadow: 0 0 4px rgba(160, 160, 160, 0.4);}.jimu-widget-splash-mobile .splash-container{height: 100%; position: relative; display: block; padding: 10px;}.jimu-widget-splash-mobile .splash-container .custom-content{position: absolute; top: 0; color: #fff; margin-bottom: 10px; left: 10px; right: 10px; overflow: auto;}.jimu-widget-splash-mobile .splash-container .footer{position: absolute; max-height: 100px; bottom: 10px; left: 10px; right: 10px;}",
-"*now":function(f){f(['dojo/i18n!*preload*widgets/Splash/nls/Widget*["ar","cs","da","de","en","el","es","et","fi","fr","he","hr","it","ja","ko","lt","lv","nb","nl","pl","pt-br","pt-pt","ro","ru","sr","sv","th","tr","zh-cn","vi","zh-hk","zh-tw","ROOT"]'])}}});
-define("dojo/_base/declare dojo/_base/lang dojo/_base/html dojo/on dojo/query dojo/io-query dojo/cookie dijit/_WidgetsInTemplateMixin jimu/BaseWidget jimu/dijit/CheckBox jimu/tokenUtils jimu/utils esri/lang".split(" "),function(f,g,a,h,m,n,d,p,q,r,e,k,l){return f([q,p],{baseClass:"jimu-widget-splash",_hasContent:null,_requireConfirm:null,_isClosed:!1,postCreate:function(){this.inherited(arguments);this._hasContent=this.config.splash&&this.config.splash.splashContent;this._requireConfirm=this.config.splash&&
-this.config.splash.requireConfirm;this._showOption=this.config.splash&&this.config.splash.showOption;this._confirmEverytime=this.config.splash&&this.config.splash.confirmEverytime;this._hasContent&&(this.customContentNode.innerHTML=this.config.splash.splashContent);if(!this._requireConfirm&&!this._showOption)a.setStyle(this.confirmCheck,"display","none"),a.addClass(this.okNode,"enable-btn");else{var b="";this._requireConfirm?(b=this.config.splash.confirmText,a.addClass(this.okNode,"disable-btn")):
-(b=this.nls.notShowAgain,a.addClass(this.okNode,"enable-btn"));this.confirmCheck=new r({label:k.stripHTML(b),checked:!1},this.confirmCheck);this.own(h(this.confirmCheck.domNode,"click",g.hitch(this,this.onCheckBoxClick)));a.setAttr(this.confirmCheck.domNode,"title",k.stripHTML(b));this.confirmCheck.startup()}this.config&&(this.config.splash&&this.config.splash.backgroundColor)&&a.setStyle(this.splashContainerNode,"backgroundColor",this.config.splash.backgroundColor);this.urlParams=this.getUrlParams()},
-onOpen:function(){if(!e.isInConfigOrPreviewWindow()){var a=this._getCookieKey(),a=d(a);l.isDefined(a)&&"false"===a.toString()&&this.close()}},getUrlParams:function(){var a=window.location.search;return""===a?{}:n.queryToObject(a.substr(1))},startup:function(){this.inherited(arguments);this._normalizeDomNodePosition();this.resize();this.own(h(window,"resize",g.hitch(this,function(){this.resize()})));if(!e.isInConfigOrPreviewWindow()){var a=this._getCookieKey(),a=d(a);l.isDefined(a)&&"false"===a.toString()&&
-this.close()}this._resizeContentImg()},_normalizeDomNodePosition:function(){a.setStyle(this.domNode,"top",0);a.setStyle(this.domNode,"left",0);a.setStyle(this.domNode,"right",0);a.setStyle(this.domNode,"bottom",0)},setPosition:function(b){this.position=b;a.place(this.domNode,window.jimuConfig.layoutId);this._normalizeDomNodePosition();this.started&&this.resize()},resize:function(){this._changeStatus()},_resizeContentImg:function(){var b=a.getContentBox(this.customContentNode);if(this._hasContent&&
-!this._isClosed){a.empty(this.customContentNode);var c=a.toDom(this.config.splash.splashContent);if(c.nodeType&&(11===c.nodeType||1===c.nodeType)){var d=m("img",c);d&&d.length?d.style({maxWidth:b.w-20+"px"}):"IMG"===c.nodeName.toUpperCase()&&a.setStyle(c,"maxWidth",b.w-20+"px")}a.place(c,this.customContentNode)}},_changeStatus:function(){var b;b=window.appInfo.isRunInMobile?!0:!1;b?(a.addClass(this.domNode,"jimu-widget-splash-mobile"),a.removeClass(this.domNode,"jimu-widget-splash-desktop")):(a.addClass(this.domNode,
-"jimu-widget-splash-desktop"),a.removeClass(this.domNode,"jimu-widget-splash-mobile"));a.hasClass(this.domNode,"jimu-widget-splash-desktop")?(a.setStyle(this.customContentNode,"marginTop","20px"),a.setStyle(this.customContentNode,"height","auto"),(b=a.getContentBox(this.splashContainerNode))&&0<b.w&&a.setStyle(this.envelopeNode,"width",b.w+"px"),b&&0<b.h&&a.setStyle(this.envelopeNode,"height",b.h+"px")):(a.setStyle(this.splashContainerNode,"top",0),a.setStyle(this.splashContainerNode,"left",0),a.setStyle(this.envelopeNode,
-"width","auto"),a.setStyle(this.envelopeNode,"height","auto"),this._moveContentToMiddle());this._resizeContentImg()},_moveContentToMiddle:function(){a.setStyle(this.customContentNode,{marginTop:0,height:"auto"});var b=a.getMarginBox(this.splashContainerNode),c=a.getContentBox(this.splashContainerNode),d=a.getContentBox(this.customContentNode),e=a.getMarginBox(this.footerNode),b=(b.h-e.h-d.h)/2;"number"===typeof b&&10<b?a.setStyle(this.customContentNode,"marginTop",b+"px"):(a.setStyle(this.customContentNode,
-"marginTop","10px"),c=c.h-e.h-10,"number"===typeof c&&0<c&&a.setStyle(this.customContentNode,"height",c+"px"))},onCheckBoxClick:function(){this._requireConfirm&&(this.confirmCheck.getValue()?(a.addClass(this.okNode,"enable-btn"),a.removeClass(this.okNode,"disable-btn")):(a.addClass(this.okNode,"disable-btn"),a.removeClass(this.okNode,"enable-btn")))},_getCookieKey:function(){return"isfirst_"+this.urlParams.id||this.urlParams.appid||window.path},onOkClick:function(){var a=this._getCookieKey();this._requireConfirm?
-this.confirmCheck.getValue()&&(e.isInConfigOrPreviewWindow()||this._confirmEverytime?d(a,null,{expires:-1}):d(a,!1,{expires:1E3,path:"/"}),this.close()):(this._showOption?!e.isInConfigOrPreviewWindow()&&this.confirmCheck.getValue()&&d(a,!1,{expires:1E3,path:"/"}):d(a,null,{expires:-1}),this.close())},close:function(){this._isClosed=!0;this.widgetManager.closeWidget(this)}})});
+///////////////////////////////////////////////////////////////////////////
+// Copyright © 2014 Esri. All Rights Reserved.
+//
+// Licensed under the Apache License Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+///////////////////////////////////////////////////////////////////////////
+
+define(['dojo/_base/declare',
+    'dojo/_base/lang',
+    'dojo/_base/html',
+    'dojo/on',
+    'dojo/query',
+    'dojo/io-query',
+    'dojo/cookie',
+    'dijit/_WidgetsInTemplateMixin',
+    'jimu/BaseWidget',
+    'jimu/dijit/CheckBox',
+    'jimu/tokenUtils',
+    'jimu/utils',
+    'esri/lang'
+  ],
+  function(declare, lang, html, on, query, ioquery, cookie, _WidgetsInTemplateMixin, BaseWidget,
+    CheckBox, TokenUtils, utils, esriLang) {
+    function isFullWindow() {
+      if (window.appInfo.isRunInMobile) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    var clazz = declare([BaseWidget, _WidgetsInTemplateMixin], {
+      baseClass: 'jimu-widget-splash',
+
+      _hasContent: null,
+      _requireConfirm: null,
+      _isClosed: false,
+
+      postCreate: function() {
+        this.inherited(arguments);
+        this._hasContent = this.config.splash && this.config.splash.splashContent;
+        this._requireConfirm = this.config.splash && this.config.splash.requireConfirm;
+        this._showOption = this.config.splash && this.config.splash.showOption;
+        this._confirmEverytime = this.config.splash && this.config.splash.confirmEverytime;
+
+        if (this._hasContent) {
+          this.customContentNode.innerHTML = this.config.splash.splashContent;
+        }
+
+        if (!this._requireConfirm && !this._showOption) {
+          html.setStyle(this.confirmCheck, 'display', 'none');
+          html.addClass(this.okNode, 'enable-btn');
+        } else {
+          var hint = "";
+          if (this._requireConfirm) {
+            hint = this.config.splash.confirmText;
+            html.addClass(this.okNode, 'disable-btn');
+          } else {
+            hint = this.nls.notShowAgain;
+            html.addClass(this.okNode, 'enable-btn');
+          }
+          this.confirmCheck = new CheckBox({
+            label: utils.stripHTML(hint),
+            checked: false
+          }, this.confirmCheck);
+          this.own(on(this.confirmCheck.domNode, 'click', lang.hitch(this, this.onCheckBoxClick)));
+          html.setAttr(this.confirmCheck.domNode, 'title', utils.stripHTML(hint));
+          this.confirmCheck.startup();
+        }
+
+        if (this.config && this.config.splash && this.config.splash.backgroundColor) {
+          html.setStyle(
+            this.splashContainerNode,
+            'backgroundColor',
+            this.config.splash.backgroundColor
+          );
+        }
+
+        this.urlParams = this.getUrlParams();
+      },
+
+      onOpen: function() {
+        if (!TokenUtils.isInConfigOrPreviewWindow()) {
+          var isFirstKey = this._getCookieKey();
+          var isfirst = cookie(isFirstKey);
+          if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
+            this.close();
+          }
+        }
+      },
+
+      getUrlParams: function() {
+        var s = window.location.search,
+          p;
+        if (s === '') {
+          return {};
+        }
+
+        p = ioquery.queryToObject(s.substr(1));
+        return p;
+      },
+
+      startup: function() {
+        this.inherited(arguments);
+
+        this._normalizeDomNodePosition();
+        this.resize();
+        this.own(on(window, 'resize', lang.hitch(this, function() {
+          this.resize();
+        })));
+
+        if (!TokenUtils.isInConfigOrPreviewWindow()) {
+          var isFirstKey = this._getCookieKey();
+          var isfirst = cookie(isFirstKey);
+          if (esriLang.isDefined(isfirst) && isfirst.toString() === 'false') {
+            this.close();
+          }
+        }
+
+        this._resizeContentImg();
+      },
+
+      _normalizeDomNodePosition: function() {
+        html.setStyle(this.domNode, 'top', 0);
+        html.setStyle(this.domNode, 'left', 0);
+        html.setStyle(this.domNode, 'right', 0);
+        html.setStyle(this.domNode, 'bottom', 0);
+      },
+
+      setPosition: function(position){
+        this.position = position;
+
+        html.place(this.domNode, window.jimuConfig.layoutId);
+        this._normalizeDomNodePosition();
+        if(this.started){
+          this.resize();
+        }
+      },
+
+      resize: function() {
+        this._changeStatus();
+      },
+
+      _resizeContentImg: function() {
+        var customBox = html.getContentBox(this.customContentNode);
+
+        if (this._hasContent && !this._isClosed) {
+          html.empty(this.customContentNode);
+
+          var splashContent = html.toDom(this.config.splash.splashContent);
+          // DocumentFragment or single node
+          if (splashContent.nodeType &&
+            (splashContent.nodeType === 11 || splashContent.nodeType === 1)) {
+            var contentImgs = query('img', splashContent);
+            if (contentImgs && contentImgs.length) {
+              contentImgs.style({
+                maxWidth: (customBox.w - 20) + 'px' // prevent x scroll
+              });
+            } else if (splashContent.nodeName.toUpperCase() === 'IMG') {
+              html.setStyle(splashContent, 'maxWidth', (customBox.w - 20) + 'px');
+            }
+          }
+          html.place(splashContent, this.customContentNode);
+        }
+      },
+
+      _changeStatus: function() {
+        if (isFullWindow()) {
+          html.addClass(this.domNode, 'jimu-widget-splash-mobile');
+          html.removeClass(this.domNode, 'jimu-widget-splash-desktop');
+        } else {
+          html.addClass(this.domNode, 'jimu-widget-splash-desktop');
+          html.removeClass(this.domNode, 'jimu-widget-splash-mobile');
+        }
+
+        if (html.hasClass(this.domNode, 'jimu-widget-splash-desktop')) {
+          html.setStyle(this.customContentNode, 'marginTop', '20px');
+          html.setStyle(this.customContentNode, 'height', 'auto');
+
+          var box = html.getContentBox(this.splashContainerNode);
+          if (box && box.w > 0) {
+            html.setStyle(this.envelopeNode, 'width', box.w + 'px');
+          }
+          if (box && box.h > 0) {
+            html.setStyle(this.envelopeNode, 'height', box.h + 'px');
+          }
+        } else {
+          html.setStyle(this.splashContainerNode, 'top', 0);
+          html.setStyle(this.splashContainerNode, 'left', 0);
+          html.setStyle(this.envelopeNode, 'width', 'auto');
+          html.setStyle(this.envelopeNode, 'height', 'auto');
+
+          this._moveContentToMiddle();
+        }
+        this._resizeContentImg();
+      },
+
+      _moveContentToMiddle: function() { // mobile
+        html.setStyle(this.customContentNode, {
+          marginTop: 0,
+          height: 'auto'
+        });
+        var containerBox = html.getMarginBox(this.splashContainerNode);
+        var containerContent = html.getContentBox(this.splashContainerNode);
+        var customContentNode = html.getContentBox(this.customContentNode);
+        var footerBox = html.getMarginBox(this.footerNode);
+        var mTop = (containerBox.h - footerBox.h - customContentNode.h) / 2;
+        if (typeof mTop === 'number' && mTop > 10) { // when customContentNode.h < containerBox.h
+          html.setStyle(this.customContentNode, 'marginTop', mTop + 'px');
+        } else { // when customContentNode.h > containerBox.h
+          html.setStyle(this.customContentNode, 'marginTop', '10px');
+          var customContentHeight = containerContent.h - footerBox.h - 10; // margin-bottom:20px
+          if (typeof customContentHeight === 'number' && customContentHeight > 0) {
+            html.setStyle(this.customContentNode, 'height', customContentHeight + 'px');
+          }
+        }
+      },
+
+      onCheckBoxClick: function() {
+        if (this._requireConfirm) {
+          if (this.confirmCheck.getValue()) {
+            html.addClass(this.okNode, 'enable-btn');
+            html.removeClass(this.okNode, 'disable-btn');
+          } else {
+            html.addClass(this.okNode, 'disable-btn');
+            html.removeClass(this.okNode, 'enable-btn');
+          }
+        }
+      },
+
+      _getCookieKey: function() {
+        // xt or integration use id of app as key,
+        // deploy app use pathname as key
+        return 'isfirst_' +  this.urlParams.id || this.urlParams.appid ||
+          window.path;
+      },
+
+      onOkClick: function() {
+        var isFirstKey = this._getCookieKey();
+        if (this._requireConfirm) {
+          if (this.confirmCheck.getValue()) {
+            if (TokenUtils.isInConfigOrPreviewWindow() || this._confirmEverytime) {
+              cookie(isFirstKey, null, {expires: -1});
+            } else {
+              cookie(isFirstKey, false, {
+                expires: 1000,
+                path: '/'
+              });
+            }
+            this.close();
+          }
+        } else {
+          if (this._showOption) {
+            if (!TokenUtils.isInConfigOrPreviewWindow() && this.confirmCheck.getValue()) {
+              cookie(isFirstKey, false, {
+                expires: 1000,
+                path: '/'
+              });
+            }
+          } else {
+            cookie(isFirstKey, null, {expires: -1});
+          }
+          this.close();
+        }
+      },
+
+      close: function() {
+        this._isClosed = true;
+        this.widgetManager.closeWidget(this);
+      }
+    });
+    return clazz;
+  });
